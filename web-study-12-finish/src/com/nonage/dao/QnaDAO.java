@@ -1,4 +1,4 @@
-ï»¿package com.nonage.dao;
+package com.nonage.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -97,12 +97,10 @@ public class QnaDAO {
     }
   }
 
-  /* *
-   * ê´€ë¦¬ì ëª¨ë“œì—ì„œ í•„ìš”í•œ ë©”ì†Œë“œ
-   */
+  /* * * °ü¸®ÀÚ ¸ğµå¿¡¼­ ÇÊ¿äÇÑ ¸Ş¼Òµå */
   public ArrayList<QnaVO> listAllQna() {
     ArrayList<QnaVO> qnaList = new ArrayList<QnaVO>();
-    // ê²Œì‹œíŒì˜ ë°ì´í„°ë¥¼ ê°€ì§€ê³  ì˜¤ëŠ” ì¿¼ë¦¬ rep:1:ê²Œì‹œë¬¼ 2: ë‹µë³€
+    // °Ô½ÃÆÇÀÇ µ¥ÀÌÅÍ¸¦ °¡Áö°í ¿À´Â Äõ¸® rep:1:°Ô½Ã¹° 2: ´äº¯
     String sql = "select * from qna order by indate desc";
 
     Connection conn = null;

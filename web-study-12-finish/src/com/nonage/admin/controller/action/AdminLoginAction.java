@@ -24,14 +24,14 @@ public class AdminLoginAction implements Action {
 
     int result = workerDAO.workerCheck(workerId, workerPwd);
     
-    if (result == 1) {// ë¡œê·¸ì¸ ì„±ê³µ
+    if (result == 1) {// ·Î±×ÀÎ ¼º°ø
       HttpSession session = request.getSession();
       session.setAttribute("workerId", workerId);
       url = "NonageServlet?command=admin_product_list";
     } else if (result == 0) {
-      msg = "ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•˜ì„¸ìš”.";
+      msg = "ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇÏ¼¼¿ä.";
     } else if (result == -1) {
-      msg = "ì•„ì´ë””ë¥¼ í™•ì¸í•˜ì„¸ìš”.";
+      msg = "¾ÆÀÌµğ¸¦ È®ÀÎÇÏ¼¼¿ä.";
     }
     request.setAttribute("message", msg);
     request.getRequestDispatcher(url).forward(request, response);

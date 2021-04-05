@@ -21,7 +21,7 @@ public class OrderDAO {
 		return instance;
 	}
 
-	// ì‚¬ìš©ìê°€ ì£¼ë¬¸
+	// »ç¿ëÀÚ°¡ ÁÖ¹®
 	public int insertOrder(ArrayList<CartVO> cartList, String id) {
 		int maxOseq = 0;
 
@@ -84,7 +84,7 @@ public class OrderDAO {
 		}
 	}
 
-	// ì‚¬ìš©ìê°€ ì£¼ë¬¸ ë‚´ì—­ ê²€ìƒ‰
+	// »ç¿ëÀÚ°¡ ÁÖ¹® ³»¿ª °Ë»ö
 	public ArrayList<OrderVO> listOrderById(String id, String result, int oseq) {
 		ArrayList<OrderVO> orderList = new ArrayList<OrderVO>();
 		String sql = "select * from order_view where id=? "
@@ -124,7 +124,7 @@ public class OrderDAO {
 		return orderList;
 	}
 
-	// í˜„ì¬ ì§„í–‰ ì¤‘ì¸ ì£¼ë¬¸ ë‚´ì—­ë§Œ ì¡°íšŒ
+	// ÇöÀç ÁøÇà ÁßÀÎ ÁÖ¹® ³»¿ª¸¸ Á¶È¸
 	public ArrayList<Integer> selectSeqOrderIng(String id) {
 		ArrayList<Integer> oseqList = new ArrayList<Integer>();
 		String sql = "select distinct oseq from order_view "
@@ -150,7 +150,7 @@ public class OrderDAO {
 	}
 
 	/* *
-	 * ê´€ë¦¬ì ëª¨ë“œì—ì„œ ì‚¬ìš©ë˜ëŠ” ë©”ì†Œë“œ * *
+	 * °ü¸®ÀÚ ¸ğµå¿¡¼­ »ç¿ëµÇ´Â ¸Ş¼Òµå * *
 	 */
 	public ArrayList<OrderVO> listOrder(String member_name) {
 		ArrayList<OrderVO> orderList = new ArrayList<OrderVO>();

@@ -1,0 +1,444 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-1월-18-2021   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence CART_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "NONAGE"."CART_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence ORDERS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "NONAGE"."ORDERS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence ORDER_DETAIL_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "NONAGE"."ORDER_DETAIL_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PRODUCT_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "NONAGE"."PRODUCT_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence QNA_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "NONAGE"."QNA_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Table CART
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."CART" 
+   (	"CSEQ" NUMBER(10,0), 
+	"ID" VARCHAR2(16 BYTE), 
+	"PSEQ" NUMBER(5,0), 
+	"QUANTITY" NUMBER(5,0) DEFAULT 1, 
+	"RESULT" CHAR(1 BYTE) DEFAULT '1', 
+	"INDATE" DATE DEFAULT SYSDATE   -- 주문일
+
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MEMBER
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."MEMBER" 
+   (	"ID" VARCHAR2(20 BYTE), 
+	"PWD" VARCHAR2(20 BYTE), 
+	"NAME" VARCHAR2(40 BYTE), 
+	"EMAIL" VARCHAR2(40 BYTE), 
+	"ZIP_NUM" VARCHAR2(7 BYTE), 
+	"ADDRESS" VARCHAR2(100 BYTE), 
+	"PHONE" VARCHAR2(20 BYTE), 
+	"USEYN" CHAR(1 BYTE) DEFAULT 'y', 
+	"INDATE" DATE DEFAULT sysdate
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table NONAGE
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."NONAGE" 
+   (	"COLUMN1" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table ORDERS
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."ORDERS" 
+   (	"OSEQ" NUMBER(10,0), 
+	"ID" VARCHAR2(16 BYTE), 
+	"INDATE" DATE DEFAULT sysdate       -- 주문일
+
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table ORDER_DETAIL
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."ORDER_DETAIL" 
+   (	"ODSEQ" NUMBER(10,0), 
+	"OSEQ" NUMBER(10,0), 
+	"PSEQ" NUMBER(5,0), 
+	"QUANTITY" NUMBER(5,0) DEFAULT 1, 
+	"RESULT" CHAR(1 BYTE) DEFAULT '1'                -- 1: 미처리 2: 처리     
+
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCT
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."PRODUCT" 
+   (	"PSEQ" NUMBER(5,0), 
+	"NAME" VARCHAR2(100 BYTE), 
+	"KIND" CHAR(1 BYTE), 
+	"PRICE1" NUMBER(7,0) DEFAULT '0', 
+	"PRICE2" NUMBER(7,0) DEFAULT '0', 
+	"PRICE3" NUMBER(7,0) DEFAULT '0', 
+	"CONTENT" VARCHAR2(1000 BYTE), 
+	"IMAGE" VARCHAR2(50 BYTE) DEFAULT 'default.jpg', 
+	"USEYN" CHAR(1 BYTE) DEFAULT 'y', 
+	"BESTYN" CHAR(1 BYTE) DEFAULT 'n', 
+	"INDATE" DATE DEFAULT sysdate
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table QNA
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."QNA" 
+   (	"QSEQ" NUMBER(5,0), 
+	"SUBJECT" VARCHAR2(300 BYTE), 
+	"CONTENT" VARCHAR2(1000 BYTE), 
+	"REPLY" VARCHAR2(1000 BYTE), 
+	"ID" VARCHAR2(20 BYTE), 
+	"REP" CHAR(1 BYTE) DEFAULT '1', 
+	"INDATE" DATE DEFAULT sysdate     -- 작성일
+
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table WORKER
+--------------------------------------------------------
+
+  CREATE TABLE "NONAGE"."WORKER" 
+   (	"ID" VARCHAR2(20 BYTE), 
+	"PWD" VARCHAR2(20 BYTE), 
+	"NAME" VARCHAR2(40 BYTE), 
+	"PHONE" VARCHAR2(20 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for View BEST_PRO_VIEW
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "NONAGE"."BEST_PRO_VIEW" ("PSEQ", "NAME", "PRICE2", "IMAGE") AS 
+  select pseq, name, price2, image 
+from( select rownum, pseq, name, price2, image 
+      from product  
+      where bestyn='y' 
+      order by indate desc)
+where  rownum <=4
+;
+--------------------------------------------------------
+--  DDL for View CART_VIEW
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "NONAGE"."CART_VIEW" ("CSEQ", "ID", "PSEQ", "MNAME", "PNAME", "QUANTITY", "INDATE", "PRICE2", "RESULT") AS 
+  select o.cseq, o.id, o.pseq, m.name mname, p.name pname, 
+o.quantity, o.indate, p.price2, o.result 
+from cart o, member m, product p 
+where o.id = m.id and o.pseq = p.pseq
+and result='1'
+;
+--------------------------------------------------------
+--  DDL for View NEW_PRO_VIEW
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "NONAGE"."NEW_PRO_VIEW" ("PSEQ", "NAME", "PRICE2", "IMAGE") AS 
+  select pseq, name, price2, image 
+from( select rownum, pseq, name, price2, image 
+      from product  
+      where useyn='y' 
+      order by indate desc)
+where  rownum <=4
+;
+--------------------------------------------------------
+--  DDL for View ORDER_VIEW
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "NONAGE"."ORDER_VIEW" ("ODSEQ", "OSEQ", "ID", "INDATE", "PSEQ", "QUANTITY", "MNAME", "ZIP_NUM", "ADDRESS", "PHONE", "PNAME", "PRICE2", "RESULT") AS 
+  select d.odseq, o.oseq, o.id, o.indate, d.pseq,d.quantity, m.name mname,
+m.zip_num, m.address, m.phone, p.name pname, p.price2, d.result   
+from orders o, order_detail d, member m, product p 
+where o.oseq=d.oseq and o.id = m.id and d.pseq = p.pseq
+;
+REM INSERTING into NONAGE.CART
+SET DEFINE OFF;
+Insert into NONAGE.CART (CSEQ,ID,PSEQ,QUANTITY,RESULT,INDATE) values (1,'one',1,1,'1',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.CART (CSEQ,ID,PSEQ,QUANTITY,RESULT,INDATE) values (2,'hansol',7,1,'2',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.CART (CSEQ,ID,PSEQ,QUANTITY,RESULT,INDATE) values (21,'hansol',4,1,'2',to_date('21/01/05','RR/MM/DD'));
+Insert into NONAGE.CART (CSEQ,ID,PSEQ,QUANTITY,RESULT,INDATE) values (22,'hansol',6,1,'2',to_date('21/01/05','RR/MM/DD'));
+Insert into NONAGE.CART (CSEQ,ID,PSEQ,QUANTITY,RESULT,INDATE) values (29,'hansol',3,1,'2',to_date('21/01/08','RR/MM/DD'));
+Insert into NONAGE.CART (CSEQ,ID,PSEQ,QUANTITY,RESULT,INDATE) values (30,'hansol',8,1,'2',to_date('21/01/08','RR/MM/DD'));
+Insert into NONAGE.CART (CSEQ,ID,PSEQ,QUANTITY,RESULT,INDATE) values (28,'hansol',2,1,'2',to_date('21/01/08','RR/MM/DD'));
+REM INSERTING into NONAGE.MEMBER
+SET DEFINE OFF;
+Insert into NONAGE.MEMBER (ID,PWD,NAME,EMAIL,ZIP_NUM,ADDRESS,PHONE,USEYN,INDATE) values ('one','1111','김나리',null,'133-110','서울시성동구성수동1가 1번지21호','017-777-7777','y',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.MEMBER (ID,PWD,NAME,EMAIL,ZIP_NUM,ADDRESS,PHONE,USEYN,INDATE) values ('two','2222','이백합',null,'130-120','서울시송파구잠실2동 리센츠 아파트 201동 505호','011-123-4567','y',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.MEMBER (ID,PWD,NAME,EMAIL,ZIP_NUM,ADDRESS,PHONE,USEYN,INDATE) values ('hansol','1234','한솔',null,null,null,null,'y',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.MEMBER (ID,PWD,NAME,EMAIL,ZIP_NUM,ADDRESS,PHONE,USEYN,INDATE) values ('hsanol62','1234','한솔',null,null,null,null,'y',to_date('20/12/28','RR/MM/DD'));
+REM INSERTING into NONAGE.NONAGE
+SET DEFINE OFF;
+REM INSERTING into NONAGE.ORDERS
+SET DEFINE OFF;
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (1,'one',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (2,'one',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (3,'two',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (21,'hansol',to_date('21/01/05','RR/MM/DD'));
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (22,'hansol',to_date('21/01/05','RR/MM/DD'));
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (23,'hansol',to_date('21/01/08','RR/MM/DD'));
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (24,'hansol',to_date('21/01/08','RR/MM/DD'));
+Insert into NONAGE.ORDERS (OSEQ,ID,INDATE) values (25,'hansol',to_date('21/01/08','RR/MM/DD'));
+REM INSERTING into NONAGE.ORDER_DETAIL
+SET DEFINE OFF;
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (1,1,1,1,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (2,1,2,5,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (3,2,4,3,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (4,3,3,1,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (5,3,2,1,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (6,3,6,2,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (7,3,1,2,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (21,3,4,1,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (22,3,7,1,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (23,21,6,1,'2');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (24,22,3,1,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (25,22,2,1,'1');
+Insert into NONAGE.ORDER_DETAIL (ODSEQ,OSEQ,PSEQ,QUANTITY,RESULT) values (26,24,8,1,'2');
+REM INSERTING into NONAGE.PRODUCT
+SET DEFINE OFF;
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (1,'크로그다일부츠','2',40000,50000,10000,'오지니랄 크로그다일부츠 입니다.','w2.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (2,'롱부츠','2',40000,50000,10000,'따뜻한 롱부츠 입니다.','w-28.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (3,'힐','1',10000,12000,2000,'여성용전용 힐','w-26.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (4,'슬리퍼','4',5000,5500,500,'편안한 슬리퍼입니다.','w-25.jpg','y','y',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (5,'회색힐','1',10000,12000,2000,'여성용전용 힐','w9.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (6,'여성부츠','2',12000,18000,6000,'여성용 부츠','w4.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (7,'핑크샌달','3',5000,5500,500,'사계절용 샌달입니다.','w-10.jpg','y','y',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (8,'슬리퍼','3',5000,5500,500,'편안한 슬리퍼입니다.','w11.jpg','y','y',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (9,'스니커즈','4',15000,20000,5000,'활동성이 좋은 스니커즈입니다.','w1.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (10,'샌달','3',5000,5500,500,'사계절용 샌달입니다.','w-09.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.PRODUCT (PSEQ,NAME,KIND,PRICE1,PRICE2,PRICE3,CONTENT,IMAGE,USEYN,BESTYN,INDATE) values (11,'스니커즈','5',15000,20000,5000,'활동성이 좋은 스니커즈입니다.','w-05.jpg','y','n',to_date('20/12/26','RR/MM/DD'));
+REM INSERTING into NONAGE.QNA
+SET DEFINE OFF;
+Insert into NONAGE.QNA (QSEQ,SUBJECT,CONTENT,REPLY,ID,REP,INDATE) values (1,'테스트','질문내용1','답변내용','one','2',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.QNA (QSEQ,SUBJECT,CONTENT,REPLY,ID,REP,INDATE) values (2,'테스트2','질문내용2',null,'one','1',to_date('20/12/26','RR/MM/DD'));
+Insert into NONAGE.QNA (QSEQ,SUBJECT,CONTENT,REPLY,ID,REP,INDATE) values (21,'Q&A 게시판','질문해본다.','질문에 답변을 한다.','hansol','2',to_date('21/01/07','RR/MM/DD'));
+REM INSERTING into NONAGE.WORKER
+SET DEFINE OFF;
+Insert into NONAGE.WORKER (ID,PWD,NAME,PHONE) values ('admin','admin','홍관리','010-777-7777');
+Insert into NONAGE.WORKER (ID,PWD,NAME,PHONE) values ('pinksung','pinksung','명강사','010-999-9696');
+REM INSERTING into NONAGE.BEST_PRO_VIEW
+SET DEFINE OFF;
+Insert into NONAGE.BEST_PRO_VIEW (PSEQ,NAME,PRICE2,IMAGE) values (4,'슬리퍼',5500,'w-25.jpg');
+Insert into NONAGE.BEST_PRO_VIEW (PSEQ,NAME,PRICE2,IMAGE) values (7,'핑크샌달',5500,'w-10.jpg');
+Insert into NONAGE.BEST_PRO_VIEW (PSEQ,NAME,PRICE2,IMAGE) values (8,'슬리퍼',5500,'w11.jpg');
+REM INSERTING into NONAGE.CART_VIEW
+SET DEFINE OFF;
+Insert into NONAGE.CART_VIEW (CSEQ,ID,PSEQ,MNAME,PNAME,QUANTITY,INDATE,PRICE2,RESULT) values (1,'one',1,'김나리','크로그다일부츠',1,to_date('20/12/26','RR/MM/DD'),50000,'1');
+REM INSERTING into NONAGE.NEW_PRO_VIEW
+SET DEFINE OFF;
+Insert into NONAGE.NEW_PRO_VIEW (PSEQ,NAME,PRICE2,IMAGE) values (1,'크로그다일부츠',50000,'w2.jpg');
+Insert into NONAGE.NEW_PRO_VIEW (PSEQ,NAME,PRICE2,IMAGE) values (2,'롱부츠',50000,'w-28.jpg');
+Insert into NONAGE.NEW_PRO_VIEW (PSEQ,NAME,PRICE2,IMAGE) values (3,'힐',12000,'w-26.jpg');
+Insert into NONAGE.NEW_PRO_VIEW (PSEQ,NAME,PRICE2,IMAGE) values (4,'슬리퍼',5500,'w-25.jpg');
+REM INSERTING into NONAGE.ORDER_VIEW
+SET DEFINE OFF;
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (7,3,'two',to_date('20/12/26','RR/MM/DD'),1,2,'이백합','130-120','서울시송파구잠실2동 리센츠 아파트 201동 505호','011-123-4567','크로그다일부츠',50000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (1,1,'one',to_date('20/12/26','RR/MM/DD'),1,1,'김나리','133-110','서울시성동구성수동1가 1번지21호','017-777-7777','크로그다일부츠',50000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (25,22,'hansol',to_date('21/01/05','RR/MM/DD'),2,1,'한솔',null,null,null,'롱부츠',50000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (5,3,'two',to_date('20/12/26','RR/MM/DD'),2,1,'이백합','130-120','서울시송파구잠실2동 리센츠 아파트 201동 505호','011-123-4567','롱부츠',50000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (2,1,'one',to_date('20/12/26','RR/MM/DD'),2,5,'김나리','133-110','서울시성동구성수동1가 1번지21호','017-777-7777','롱부츠',50000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (24,22,'hansol',to_date('21/01/05','RR/MM/DD'),3,1,'한솔',null,null,null,'힐',12000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (4,3,'two',to_date('20/12/26','RR/MM/DD'),3,1,'이백합','130-120','서울시송파구잠실2동 리센츠 아파트 201동 505호','011-123-4567','힐',12000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (21,3,'two',to_date('20/12/26','RR/MM/DD'),4,1,'이백합','130-120','서울시송파구잠실2동 리센츠 아파트 201동 505호','011-123-4567','슬리퍼',5500,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (3,2,'one',to_date('20/12/26','RR/MM/DD'),4,3,'김나리','133-110','서울시성동구성수동1가 1번지21호','017-777-7777','슬리퍼',5500,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (23,21,'hansol',to_date('21/01/05','RR/MM/DD'),6,1,'한솔',null,null,null,'여성부츠',18000,'2');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (6,3,'two',to_date('20/12/26','RR/MM/DD'),6,2,'이백합','130-120','서울시송파구잠실2동 리센츠 아파트 201동 505호','011-123-4567','여성부츠',18000,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (22,3,'two',to_date('20/12/26','RR/MM/DD'),7,1,'이백합','130-120','서울시송파구잠실2동 리센츠 아파트 201동 505호','011-123-4567','핑크샌달',5500,'1');
+Insert into NONAGE.ORDER_VIEW (ODSEQ,OSEQ,ID,INDATE,PSEQ,QUANTITY,MNAME,ZIP_NUM,ADDRESS,PHONE,PNAME,PRICE2,RESULT) values (26,24,'hansol',to_date('21/01/08','RR/MM/DD'),8,1,'한솔',null,null,null,'슬리퍼',5500,'2');
+--------------------------------------------------------
+--  DDL for Index SYS_C007244
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NONAGE"."SYS_C007244" ON "NONAGE"."WORKER" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007245
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NONAGE"."SYS_C007245" ON "NONAGE"."MEMBER" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007246
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NONAGE"."SYS_C007246" ON "NONAGE"."PRODUCT" ("PSEQ") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007247
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NONAGE"."SYS_C007247" ON "NONAGE"."CART" ("CSEQ") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007250
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NONAGE"."SYS_C007250" ON "NONAGE"."ORDERS" ("OSEQ") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007252
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NONAGE"."SYS_C007252" ON "NONAGE"."ORDER_DETAIL" ("ODSEQ") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007255
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "NONAGE"."SYS_C007255" ON "NONAGE"."QNA" ("QSEQ") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table CART
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."CART" ADD PRIMARY KEY ("CSEQ")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table MEMBER
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."MEMBER" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ORDERS
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."ORDERS" ADD PRIMARY KEY ("OSEQ")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ORDER_DETAIL
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."ORDER_DETAIL" ADD PRIMARY KEY ("ODSEQ")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PRODUCT
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."PRODUCT" ADD PRIMARY KEY ("PSEQ")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table QNA
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."QNA" ADD PRIMARY KEY ("QSEQ")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table WORKER
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."WORKER" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CART
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."CART" ADD FOREIGN KEY ("ID")
+	  REFERENCES "NONAGE"."MEMBER" ("ID") ENABLE;
+  ALTER TABLE "NONAGE"."CART" ADD FOREIGN KEY ("PSEQ")
+	  REFERENCES "NONAGE"."PRODUCT" ("PSEQ") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ORDERS
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."ORDERS" ADD FOREIGN KEY ("ID")
+	  REFERENCES "NONAGE"."MEMBER" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ORDER_DETAIL
+--------------------------------------------------------
+
+  ALTER TABLE "NONAGE"."ORDER_DETAIL" ADD FOREIGN KEY ("OSEQ")
+	  REFERENCES "NONAGE"."ORDERS" ("OSEQ") ENABLE;
+  ALTER TABLE "NONAGE"."ORDER_DETAIL" ADD FOREIGN KEY ("PSEQ")
+	  REFERENCES "NONAGE"."PRODUCT" ("PSEQ") ENABLE;

@@ -107,7 +107,7 @@ public class MemberDAO {
   }
   
 	/* *
-	 * ê´€ë¦¬ì ëª¨ë“œì—ì„œ ì‚¬ìš©ë˜ëŠ” ë©”ì†Œë“œ * *
+	 * °ü¸®ÀÚ ¸ğµå¿¡¼­ »ç¿ëµÇ´Â ¸Ş¼Òµå * *
 	 */
 	public ArrayList<MemberVO> listMember(String member_name) {
 		ArrayList<MemberVO> memberList = new ArrayList<MemberVO>();

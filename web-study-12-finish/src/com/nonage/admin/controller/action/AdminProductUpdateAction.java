@@ -28,12 +28,12 @@ public class AdminProductUpdateAction implements Action {
     ServletContext context = session.getServletContext();
     String uploadFilePath = context.getRealPath(savePath);
     
-    MultipartRequest multi = new MultipartRequest(request, // 1. ìš”ì²­ ê°ì²´
-        uploadFilePath, // 2. ì—…ë¡œë“œë  íŒŒì¼ì´ ì €ì¥ë  íŒŒì¼ ê²½ë¡œëª…
-        sizeLimit, // 3. ì—…ë¡œë“œë  íŒŒì¼ì˜ ìµœëŒ€ í¬ê¸°(5Mb)
-        "UTF-8", // 4. ì¸ì½”ë”© íƒ€ì… ì§€ì •
-        new DefaultFileRenamePolicy() // 5. ë®ì–´ì“°ê¸°ë¥¼ ë°©ì§€ ìœ„í•œ ë¶€ë¶„
-    ); // ì´ ì‹œì ì„ ê¸°í•´ íŒŒì¼ì€ ì´ë¯¸ ì €ì¥ì´ ë˜ì—ˆë‹¤
+    MultipartRequest multi = new MultipartRequest(request, // 1. ¿äÃ» °´Ã¼
+        uploadFilePath, // 2. ¾÷·ÎµåµÉ ÆÄÀÏÀÌ ÀúÀåµÉ ÆÄÀÏ °æ·Î¸í
+        sizeLimit, // 3. ¾÷·ÎµåµÉ ÆÄÀÏÀÇ ÃÖ´ë Å©±â(5Mb)
+        "UTF-8", // 4. ÀÎÄÚµù Å¸ÀÔ ÁöÁ¤
+        new DefaultFileRenamePolicy() // 5. µ¤¾î¾²±â¸¦ ¹æÁö À§ÇÑ ºÎºĞ
+    ); // ÀÌ ½ÃÁ¡À» ±âÇØ ÆÄÀÏÀº ÀÌ¹Ì ÀúÀåÀÌ µÇ¾ú´Ù
     
     ProductVO productVO = new ProductVO();
     productVO.setPseq(Integer.parseInt(multi.getParameter("pseq")));

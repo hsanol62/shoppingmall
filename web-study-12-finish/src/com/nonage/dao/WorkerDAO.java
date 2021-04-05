@@ -14,21 +14,20 @@ public class WorkerDAO {
 	public static WorkerDAO getInstance() {
 		return instance;
 	}
-
-	// ì‚¬ìš©ì ì¸ì¦ì„ ìœ„í•œ ë©”ì†Œë“œ : -1:ì•„ì´ë”” ì¡´ì¬ X
-	// 0:ì•„ì´ë”” ì¡´ì¬í•˜ì§€ë§Œ ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜
-	// 1:ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ ëª¨ë‘ ì¼ì¹˜
+	// »ç¿ëÀÚ ÀÎÁõÀ» À§ÇÑ ¸Ş¼Òµå : -1:¾ÆÀÌµğ Á¸Àç X
+	// 0:¾ÆÀÌµğ Á¸ÀçÇÏÁö¸¸ ºñ¹Ğ¹øÈ£ ºÒÀÏÄ¡
+	// 1:¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£ ¸ğµÎ ÀÏÄ¡
 	// login.jsp -> workerCheck.jsp
 	
-	// ì•„ì´ë””ë¥¼ ê²€ìƒ‰ ì¡°ê±´ìœ¼ë¡œ ì£¼ì–´ì„œ ë¹„ë°€ ë²ˆí˜¸ë¥¼ ì–»ì–´ì˜¨ë‹¤.	
+	// ¾ÆÀÌµğ¸¦ °Ë»ö Á¶°ÇÀ¸·Î ÁÖ¾î¼­ ºñ¹Ğ ¹øÈ£¸¦ ¾ò¾î¿Â´Ù.	
 	public int workerCheck(String userid, String userpw) {
 		String sql = "select pwd from worker where id=?";
 		int result = -1;
-		// ë””ë¹„ì™€ ì—°ë™
+		// µğºñ¿Í ¿¬µ¿
 		Connection conn = null;
-		// ì¿¼ë¦¬ë¬¸(select)ì„ ìˆ˜í–‰í•˜ê¸° ìœ„í•œ ë¬¸ì¥ ê°ì²´
+		// Äõ¸®¹®(select)À» ¼öÇàÇÏ±â À§ÇÑ ¹®Àå °´Ã¼
 		PreparedStatement pstmt = null;
-		// ê²°ê³¼ê°’ì„ ì €ì¥í•  ResultSet
+		// °á°ú°ªÀ» ÀúÀåÇÒ ResultSet
 		ResultSet rs = null;			
 		
 		try {
@@ -36,12 +35,12 @@ public class WorkerDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			rs = pstmt.executeQuery();
-			if (rs.next()) { // ì „ë‹¬ì¸ìë¡œ ì¤€ ì•„ì´ë””ì™€ ì¼ì¹˜í•˜ëŠ” í–‰ì´ ì¡´ì¬
-				result = 0; // ë“±ë¡ëœ ê´€ë¦¬ì...
-				String dbPwd = rs.getString(1); // ë””ë¹„ ì €ì¥ëœ ë¹„ë°€ë²ˆí˜¸
-				// ë””ë¹„ì˜ ë¹„ë°€ë²ˆí˜¸ì™€ ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜ ì—¬ë¶€
+			if (rs.next()) { // Àü´ŞÀÎÀÚ·Î ÁØ ¾ÆÀÌµğ¿Í ÀÏÄ¡ÇÏ´Â ÇàÀÌ Á¸Àç
+				result = 0; // µî·ÏµÈ °ü¸®ÀÚ...
+				String dbPwd = rs.getString(1); // µğºñ ÀúÀåµÈ ºñ¹Ğ¹øÈ£
+				// µğºñÀÇ ºñ¹Ğ¹øÈ£¿Í ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£ ÀÏÄ¡ ¿©ºÎ
 				if (dbPwd.equals(userpw)) {
-					result = 1; // ë¹„ë°€ë²ˆí˜¸ ë§ˆì €ë„ ì¼ì¹˜
+					result = 1; // ºñ¹Ğ¹øÈ£ ¸¶Àúµµ ÀÏÄ¡
 				}
 			}
 			DBManager.close(conn, pstmt, rs);

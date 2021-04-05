@@ -36,8 +36,8 @@ public class MyPageAction implements Action {
             loginUser.getId(), "1", oseq);
 
         OrderVO orderVO = orderListIng.get(0);
-        orderVO.setPname(orderVO.getPname() + " Ïô∏ "
-            + orderListIng.size() + "Í±¥");
+        orderVO.setPname(orderVO.getPname() + " ø‹ "
+            + orderListIng.size() + "∞«");
         
         int totalPrice = 0;
         for (OrderVO ovo : orderListIng) {
@@ -46,7 +46,7 @@ public class MyPageAction implements Action {
         orderVO.setPrice2(totalPrice);
         orderList.add(orderVO);
       }
-      request.setAttribute("title", "ÏßÑÌñâ Ï§ëÏù∏ Ï£ºÎ¨∏ ÎÇ¥Ïó≠");
+      request.setAttribute("title", "¡¯«‡ ¡ﬂ¿Œ ¡÷πÆ ≥ªø™");
       request.setAttribute("orderList", orderList);
     }
     request.getRequestDispatcher(url).forward(request, response);

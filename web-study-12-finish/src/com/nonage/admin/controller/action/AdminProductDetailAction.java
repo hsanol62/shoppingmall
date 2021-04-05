@@ -25,7 +25,7 @@ public class AdminProductDetailAction implements Action {
 
     request.setAttribute("productVO", productVO);
 
-    // ìƒí’ˆ ë¦¬ìŠ¤íŠ¸(product_list.jsp) í˜ì´ì§€ì—ì„œ ì¿¼ë¦¬ ìŠ¤íŠ¸ë§ìœ¼ë¡œ ë„˜ê²¨ì¤€ í˜„ì¬ í˜ì´ì§€ë¥¼ ì–»ì–´ì˜¨ë‹¤.
+    // »óÇ° ¸®½ºÆ®(product_list.jsp) ÆäÀÌÁö¿¡¼­ Äõ¸® ½ºÆ®¸µÀ¸·Î ³Ñ°ÜÁØ ÇöÀç ÆäÀÌÁö¸¦ ¾ò¾î¿Â´Ù.
     String tpage = "1";
     if (request.getParameter("tpage") != null) {
       tpage = request.getParameter("tpage");
