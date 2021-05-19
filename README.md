@@ -2,6 +2,8 @@
 this is shipping mall website by using JSP
 
 
+https://1drv.ms/p/s!AobNZrsqCkxOg0POppRS-zK8Rp8K?e=GU6Pee
+
 ![nonage](https://user-images.githubusercontent.com/71969709/118799884-3b2b3200-b8da-11eb-9c15-b84ad958ed4f.PNG)
 ![nonage2](https://user-images.githubusercontent.com/71969709/118799888-3cf4f580-b8da-11eb-9655-59aba311f01d.PNG)
 ![nonage3](https://user-images.githubusercontent.com/71969709/118799889-3d8d8c00-b8da-11eb-8218-7c0b426d74be.PNG)
