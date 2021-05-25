@@ -1,8 +1,8 @@
 # shoppingmall
 this is shipping mall website by using JSP
 
->목적
--쇼핑몰의 기본적인 기능을 만들어 웹을 형성해본다.
+//목적
+>쇼핑몰의 기본적인 기능을 만들어 웹을 형성해본다.
 
 
 https://1drv.ms/p/s!AobNZrsqCkxOg0POppRS-zK8Rp8K?e=GU6Pee
