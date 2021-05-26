@@ -4,7 +4,7 @@ this is shipping mall website by using JSP
 ## 목적
 >쇼핑몰의 기본적인 기능을 만들어 웹을 형성해본다.
 
-##구현 기능
+## 구현 기능
 -메인페이지(상품진열)
 -로그인/회원가입
 -Q&A게시판
@@ -13,7 +13,7 @@ this is shipping mall website by using JSP
 -마이페이지(주문내역 확인)
 -관리자페이지(주문내역확인, 회원정보확인)
 
-##역할
+## 역할
 -JDBC 연결
 -tomcat 설정 및 연결
 -ERD 다이어그램 작성
